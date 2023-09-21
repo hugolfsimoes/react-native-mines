@@ -1,15 +1,9 @@
 import React from 'react';
-import type {PropsWithChildren} from 'react';
 import params from './src/params';
 import {StyleSheet, Text, useColorScheme, View} from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
+import Field from './src/components/Field';
 
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -24,6 +18,10 @@ function App(): JSX.Element {
       <Text style={styles.instructions}>
         Tamanho da grade:{params.getRowsAmount()} x {params.getColumnsAmount()}
       </Text>
+      <Field />
+      <Field opened />
+      <Field nearMines={8} opened />
+      <Field nearMines={2} opened />
     </View>
   );
 }
