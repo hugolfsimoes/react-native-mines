@@ -22,6 +22,11 @@ function App(): JSX.Element {
       <Field opened />
       <Field nearMines={8} opened />
       <Field nearMines={2} opened />
+      <Field mined />
+      <Field mined opened />
+      <Field mined opened exploded />
+      <Field flagged />
+      <Field flagged opened />
     </View>
   );
 }
@@ -34,11 +39,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#f5fcff',
   },
   welcome: {
+    color: 'black',
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
   },
   instructions: {
+    color: 'black',
     marginTop: 8,
     fontSize: 15,
     fontWeight: '400',

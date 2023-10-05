@@ -1,17 +1,29 @@
 import React from 'react';
 import {View, StyleSheet, Text} from 'react-native';
 import params from '../params';
+import Mine from './Mine';
+import Flag from './Flag';
 
 type FieldType = {
   mined?: boolean;
   opened?: boolean;
   nearMines?: number;
+  exploded?: boolean;
+  flagged?: boolean;
 };
 
-export default function Field({mined, opened, nearMines}: FieldType) {
+export default function Field({
+  mined,
+  opened,
+  nearMines,
+  exploded,
+  flagged,
+}: FieldType) {
   const styleField = [styles.field];
   if (opened) styleField.push(styles.opened);
-  if (styleField.length === 1) styleField.push(styles.regular);
+  if (exploded) styleField.push(styles.exploded);
+  //if (flagged) styleField.push(styles.flagged);
+  if (!opened && !exploded) styleField.push(styles.regular);
 
   let color = '#999';
   if (nearMines && nearMines > 0) {
@@ -23,11 +35,13 @@ export default function Field({mined, opened, nearMines}: FieldType) {
 
   return (
     <View style={styleField}>
-      {!mined && opened && nearMines > 0 ? (
+      {!mined && opened && nearMines && nearMines > 0 ? (
         <Text style={[styles.label, {color: color}]}>{nearMines}</Text>
       ) : (
         false
       )}
+      {mined && opened ? <Mine /> : false}
+      {flagged && !opened ? <Flag /> : false}
     </View>
   );
 }
@@ -54,5 +68,9 @@ const styles = StyleSheet.create({
   label: {
     fontWeight: 'bold',
     fontSize: params.fontSize,
+  },
+  exploded: {
+    backgroundColor: 'red',
+    borderBlockColor: 'red',
   },
 });
